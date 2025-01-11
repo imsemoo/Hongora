@@ -1,3 +1,4 @@
+// تهيئة مكتبة Amplitude وإضافة قائمة من الأغاني كبداية
 Amplitude.init({
   songs: [
     {
@@ -27,16 +28,17 @@ Amplitude.init({
   ],
 });
 
-// playlist toggle
-
+// عند الضغط على زر إظهار قائمة التشغيل، يقوم بإظهار/إخفاء عنصر قائمة التشغيل
 $(".show-playlist").on("click", function () {
   $("#playlist-container").toggle();
 });
 
+// عند الضغط على زر إغلاق قائمة التشغيل، يقوم بإخفاء عنصر القائمة تمامًا
 $(".close-playlist").on("click", function () {
   $("#playlist-container").hide();
 });
 
+// مصفوفة تحتوي على أغاني/حلقات جديدة يمكن إضافتها لقائمة التشغيل
 var songsToAdd = [
   {
     name: "العقلية في حياتنا الحلقة: 1",
@@ -168,34 +170,54 @@ var songsToAdd = [
   },
 ];
 
+// عند الضغط على زر التشغيل في البطاقات (الـ"player-btn")
+// يتحقق إذا كان هناك أغانٍ من قبل في قائمة التشغيل
+// ثم يبحث إذا كانت الأغنية موجودة مسبقًا أم لا
+// إذا لم تكن موجودة يضيفها إلى قائمة التشغيل ويشغلها
+// أما إذا كانت موجودة مسبقًا فيظهر رسالة في الكونسول
 $(".player-btn").on("click", function (e) {
+  // إذا كان عدد الأغاني في مكتبة Amplitude يساوي صفر، يقوم بإفراغ محتوى قائمة التشغيل
   if (Amplitude.getSongs().length === 0) {
     $(".playlist-content").html("");
   }
 
+  // جلب قيمة الفهرس الخاص بالأغنية المطلوبة من العنصر (data-song-add)
   var songToAddIndex = $(this).attr("data-song-add");
+
+  // البحث عن فهرس الأغنية في قائمة الأغاني الحالية في Amplitude، بناء على الـ id
   var index = Amplitude.getSongs().findIndex(
     (item) => item.id === songsToAdd[songToAddIndex].id
   );
+
+  // إذا لم يتم إيجاد الأغنية (الفهرس = -1) نقوم بإضافتها لقائمة التشغيل
   if (index === -1) {
+    // إضافة الأغنية إلى Amplitude وإرجاع فهرسها الجديد
     var newIndex = Amplitude.addSong(songsToAdd[songToAddIndex]);
+    // إلحاق تفاصيل الأغنية بواجهة العرض
     appendToSongDisplay(songsToAdd[songToAddIndex], newIndex);
+    // تشغيل الأغنية فورًا بعد إضافتها
     Amplitude.playSongAtIndex(newIndex);
+    // ربط العناصر الجديدة مع مكتبة Amplitude
     Amplitude.bindNewElements();
+    // تفعيل المظهر الخاص بزر التشغيل للأغنية المعنية
     setPlayButtonView(songToAddIndex);
   } else {
+    // إذا كانت الأغنية موجودة مسبقًا في القائمة
     console.log("Already added in playlist!");
   }
 });
 
-// flobal play/pause button view
+// وظيفة للتحكم في مظهر زر التشغيل/الإيقاف بناءً على الفهرس
 function setPlayButtonView(index) {
+  // إزالة الكلاس "active" عن كل العناصر أولاً
   $("[data-song-add]").removeClass("active");
+  // إضافة الكلاس "active" للزر الذي تم الضغط عليه حاليًا
   $("[data-song-add=" + index + "]").addClass("active");
 }
 
-// appends the song to the display
+// وظيفة لإلحاق الأغنية الجديدة في واجهة عرض القائمة
 function appendToSongDisplay(song, index) {
+  // إضافة عنصر HTML جديد يحتوي على تفاصيل الأغنية في قائمة التشغيل
   $(".playlist-content").append(`
       <div class="playlist-item">
         <div class="playlist-song amplitude-song-container amplitude-play-pause" data-amplitude-song-index="${index}">
@@ -210,31 +232,44 @@ function appendToSongDisplay(song, index) {
     `);
 }
 
-// playlist remove song
+// عند الضغط على زر إزالة الأغنية من القائمة
+// يقوم بإزالة العنصر من واجهة العرض ومن مكتبة Amplitude
 $(".playlist-content").on("click", ".playlist-remove", function (e) {
+  // منع حدث الضغط من التفعيل على العنصر الأب أو الأغاني نفسها
   e.stopPropagation();
+
+  // الحصول على قيمة الـ id للأغنية المطلوب حذفها
   var id = $(this).attr("data-remove-id");
+  // الحصول على العنصر الأب الذي يحتوي على معلومات الأغنية
   var $item = $(this).closest(".playlist-item");
+
+  // إيجاد موقع الأغنية في قائمة Amplitude بناءً على الـ id
   var index = Amplitude.getSongs().findIndex((song) => song.id === id);
 
+  // إذا تم إيجاد الفهرس بنجاح، احذف العنصر من الواجهة ومن مكتبة Amplitude
   if (index > -1) {
+    // حذف العنصر من واجهة المستخدم
     $item.remove();
+    // حذف الأغنية من قائمة Amplitude
     Amplitude.removeSong(index);
+
+    // إذا أصبحت قائمة الأغاني فارغة بعد الحذف، أضف نص يخبر المستخدم بذلك
     if (Amplitude.getSongs().length === 0) {
-      $(".playlist-content")
-        .html(`<div class="col-sm-8 col-10 mx-auto mt-5 text-center">
-            <i class="far fa-music mb-3"></i>
-            <p>No songs, album or playlist are added on lineup.</p>
-            </div>`);
+      $(".playlist-content").html(`
+        <div class="col-sm-8 col-10 mx-auto mt-5 text-center">
+          <i class="far fa-music mb-3"></i>
+          <p>No songs, album or playlist are added on lineup.</p>
+        </div>`);
     }
   }
 });
 
-// for volume progress
+// المتغيرات الخاصة بعناصر التحكم في مستوى الصوت
 const audioPlayerContainer = document.getElementById("player-volume");
 const volumeSlider = document.getElementById("volume-slider");
 const volumeBtn = document.getElementById("amplitude-mute");
 
+// دالة لتحديث مظهر الشريط المرئي لمستوى الصوت (progress bar)
 const showRangeProgress = (rangeInput) => {
   audioPlayerContainer.style.setProperty(
     "--volume-before-width",
@@ -242,17 +277,20 @@ const showRangeProgress = (rangeInput) => {
   );
 };
 
+// إظهار الشريط المرئي لمستوى الصوت عند التحميل
 showRangeProgress(volumeSlider);
 
+// عند تغيير قيمة مستوى الصوت، يتم تحديث الشريط المرئي
 volumeSlider.addEventListener("input", (e) => {
   showRangeProgress(e.target);
 });
 
+// عند كتم/إعادة تشغيل الصوت، يتم تحديث الشريط أيضًا (ممكن تفاديًا لتغيرات جذرية)
 volumeBtn.addEventListener("click", () => {
   showRangeProgress(volumeSlider);
 });
 
-// player hide show
+// عند الضغط على زر إخفاء مشغل الصوت، قم بقلب كلاس "show" وإخفاء قائمة التشغيل
 $(".audio-player-hide").on("click", function () {
   $(".audio-player").toggleClass("show");
   $("#playlist-container").hide();
