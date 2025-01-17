@@ -687,4 +687,24 @@ section header {
     background-image: url("../img/background/2.webp") ;
 
 }
+
+.services-list{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 3%;
+}
+.services-list .services-item{
+    width: 31.33%;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    grid-gap: 20px;
+    padding: 20px;
+    background: var(--secondary-background-color);
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
 /* End Section Our Services */
