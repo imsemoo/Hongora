@@ -1,5 +1,4 @@
 :root {
-    /* الألوان الرئيسية */
     --background-color: #1C1620;
     --secondary-background-color: #2C2233;
     --accent-color-1: #6C549B;
@@ -7,18 +6,10 @@
     --accent-color-3: #D4A5E1;
     --accent-color-4: #DCD7E8;
     --highlight-color: #E5C868;
-
-    /* النصوص */
     --text-color: #FFFFFF;
-    /* النصوص الرئيسية باللون الأبيض */
     --text-muted-color: #DCD7E8;
-    /* النصوص الثانوية */
-
-    /* ألوان الروابط */
     --link-color: #CAA43E;
     --link-hover-color: #D4A5E1;
-
-    /* تدرج الخلفية */
     --background-gradient1: linear-gradient(90deg,
             rgba(26, 42, 70, 0.75) 0%,
             rgba(31, 30, 51, 0.75) 100%),
@@ -129,14 +120,16 @@ ul {
 p {
     margin: 0;
 }
-.big-title{
+
+.big-title {
     position: relative;
     width: max-content;
     margin: 0 auto 80px;
     font-size: 2.5rem;
     padding: 0 30px;
 }
-.big-title::after{
+
+.big-title::after {
     content: "";
     width: 100%;
     height: 3px;
@@ -417,7 +410,6 @@ section header {
     height: 100%;
     object-fit: cover;
     z-index: -2;
-    /* لضمان أن الفيديو في الخلف */
 }
 
 .video-overlay {
@@ -427,15 +419,12 @@ section header {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    /* لون أسود شفاف */
     z-index: -1;
-    /* بين الفيديو والمحتوى */
 }
 
 .container {
     position: relative;
     z-index: 1;
-    /* لجعل النصوص فوق الفيديو والـ Overlay */
 }
 
 #header-subtitle {
@@ -459,7 +448,7 @@ section header {
 }
 
 
-/* شكل مشغّل الصوت */
+/* main player*/
 .audio-player {
 
     background-color: var(--secondary-background-color);
@@ -589,16 +578,19 @@ section header {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
 }
-.owl-suggestions .owl-nav button.owl-next{
+
+.owl-suggestions .owl-nav button.owl-next {
     left: -60px;
 }
+
 .owl-suggestions .owl-nav button.owl-prev {
     right: -60px;
 }
+
 .our-suggestions {
     padding: 60px 0;
     background-color: var(--secondary-background-color);
-    background-image: url("../img/background/2.webp") ;
+    background-image: url("../img/background/2.webp");
 
 }
 
@@ -682,18 +674,19 @@ section header {
 
 
 /* Start Section Our Services */
-.our-services{
+.our-services {
     padding: 60px 0;
-    background-image: url("../img/background/2.webp") ;
+    background-image: url("../img/background/2.webp");
 
 }
 
-.services-list{
+.services-list {
     display: flex;
     flex-wrap: wrap;
     grid-gap: 3%;
 }
-.services-list .services-item{
+
+.services-list .services-item {
     width: 31.33%;
     text-align: center;
     display: flex;
@@ -707,4 +700,5 @@ section header {
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
 }
+
 /* End Section Our Services */
