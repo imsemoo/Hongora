@@ -142,7 +142,9 @@ p {
   font-size: 2.5rem;
   padding: 0 30px;
 }
-
+.gold {
+  color: var(--link-color) !important;
+}
 .big-title::after {
   content: "";
   width: fit-content;
@@ -1136,4 +1138,216 @@ section header {
 .episode .content a:hover {
   background-color: #caa43e;
   color: #17111c;
+}
+/* Voices */
+.search-container .search-input {
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid var(--accent-color-1);
+  background-color: transparent;
+}
+.input-icon-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-container .search-input {
+  width: 100%;
+  padding: 20px 40px 20px 20px;
+  border-radius: 12px;
+  caret-color: #fff;
+  color: #fff;
+}
+.search-container .search-input::placeholder {
+  padding-right: 20px !important;
+  color: #fff;
+}
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  pointer-events: none;
+  color: #fff;
+  font-size: 20px;
+}
+.aside-menu {
+  border-radius: 12px;
+}
+.aside-menu .custom-checkbox input {
+  margin-bottom: 20px;
+  border-radius: 1.25em !important;
+  background-color: transparent;
+  border: 1px solid #ccc;
+}
+.voice-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-left: 20px;
+}
+.voice-card img {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.voice-card h3 {
+  font-size: 18px;
+  margin: 15px 0;
+}
+.voice-card p {
+  font-size: 14px;
+}
+/* Sounds */
+
+.sounds-menu img {
+  border-radius: 50%;
+  width: 150px;
+  margin-bottom: 15px;
+}
+.sounds-menu h6 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.sounds-menu p {
+  font-size: 14px;
+  color: #dcd7e8;
+}
+.sound-card {
+  background-color: var(--secondary-background-color);
+  padding: 20px;
+  border-radius: 12px;
+  margin-left: 20px;
+  height: 45vh;
+  margin-bottom: 15px;
+}
+.sound-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.sound-card p {
+  font-size: 14px;
+  color: #dcd7e8;
+  margin-bottom: 10px;
+}
+/* News */
+.news-parent .image-news {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  color: #fff;
+  position: relative;
+  height: 50vh;
+  border-radius: 12px;
+}
+.news-parent .image-news span,
+.news-parent .image-news h5,
+.news-parent .image-news p {
+  position: absolute;
+}
+.news-parent {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 3px;
+}
+
+.div1 {
+  grid-area: 1 / 1 / 2 / 4;
+}
+.div2 {
+  grid-area: 1 / 4 / 3 / 7;
+}
+.div3 {
+  grid-area: 2 / 1 / 5 / 7;
+}
+.div4 {
+  grid-area: 1 / 7 / 5 / 13;
+}
+.div8 {
+  grid-area: 5 / 1 / 9 / 7;
+}
+.div6 {
+  grid-area: 5 / 10 / 7 / 13;
+}
+.div7 {
+  grid-area: 5 / 7 / 7 / 10;
+}
+.div5 {
+  grid-area: 6 / 7 / 9 / 13;
+}
+/* Blog */
+.blog-card img {
+  border-radius: 12px;
+  width: 300px;
+}
+.blog-card h3 {
+  font-size: 18px;
+  margin: 15px 0;
+}
+.blog-card p {
+  font-size: 14px;
+}
+/* Suggestion */
+.suggestion .suggestion-box {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 12px;
+}
+/* News Details */
+.news-details .news-header {
+  background: linear-gradient(
+    to top,
+    transparent 50%,
+    var(--secondary-background-color) 50%
+  );
+  border-radius: 12px;
+  padding: 20px;
+}
+.news-details .news-header h5 {
+  margin: 20px 0;
+}
+.news-details .news-header img {
+  width: 100%;
+  height: 80%;
+  border-radius: 12px;
+}
+/* Tools */
+.tools .tools-box {
+  border-radius: 12px;
+  background-color: #1c1620;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+.tools .tools-box img {
+  width: 50px;
+  margin-bottom: 12px;
+}
+.tools .tools-box h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.tools .tools-box p {
+  font-size: 14px;
+}
+
+.rent-form form .form-group input {
+  background-color: var(--secondary-background-color);
+  border: none;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  padding: 12px;
+  color: #fff;
+  border: 1px solid #c0c0c0;
 }
